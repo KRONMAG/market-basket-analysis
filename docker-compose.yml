@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+
+  market-basket-analysis:
+    image: kronmag/market-basket-analysis
+    build:
+      context: .
+      dockerfile: MarketBasketAnalysis.Server.API/Dockerfile
+    container_name: market-basket-analysis
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - 8080:8080
+    volumes:
+      - market-basket-analysis-data:/app/data
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          cpus: 0.1
+          memory: 512M
+
+  grpc-ui:
+    image: fullstorydev/grpcui:v1.4.1
+    command: -plaintext market-basket-analysis-api:8080
+    restart: on-failure
+    ports:
+      - 8082:8080
+    depends_on:
+      market-basket-analysis-api:
+        condition: service_started
+
+volumes:
+  market-basket-analysis-data:

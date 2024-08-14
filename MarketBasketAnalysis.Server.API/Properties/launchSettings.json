@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "MarketBasketAnalysis.Server.API": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:8080"
+    }
+  }
+}
