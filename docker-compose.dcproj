@@ -8,9 +8,11 @@
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceName>market-basket-analysis-api</DockerServiceName>
     <DockerServiceUrl>http://localhost:8082</DockerServiceUrl>
+    <DockerComposeBaseFilePath>docker-compose.dev</DockerComposeBaseFilePath>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="docker-compose.yml" />
+    <None Include="docker-compose.dev.yml" />
+    <None Include="docker-compose.prod.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>
 </Project>

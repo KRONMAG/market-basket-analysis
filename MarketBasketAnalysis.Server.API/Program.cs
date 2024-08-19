@@ -1,11 +1,14 @@
 using MarketBasketAnalysis.Server.API.Extensions;
 using MarketBasketAnalysis.Server.API.Services;
 using MarketBasketAnalysis.Server.Application.Services;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 services.AddGrpc(o => o.ConfigureGrpc());
+builder.Services.AddGrpcHealthChecks()
+    .AddCheck("Sample", () => HealthCheckResult.Healthy());
 
 if (builder.Environment.IsDevelopment())
     services.AddGrpcReflection();
@@ -25,6 +28,7 @@ ApplicationLogging.LoggerFactory = app.Services.GetRequiredService<ILoggerFactor
 await app.ConfigureDb();
 
 app.MapGrpcService<AssociationRuleSetStorage>();
+app.MapGrpcHealthChecksService();
 
 if (app.Environment.IsDevelopment())
     app.MapGrpcReflectionService();
