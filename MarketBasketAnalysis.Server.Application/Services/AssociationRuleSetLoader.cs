@@ -124,7 +124,7 @@ public sealed class AssociationRuleSetLoader : IAssociationRuleSetLoader
 
     private static void CheckAssociationRuleSetName(string value, string paramName)
     {
-        if (string.IsNullOrEmpty(value))
+        if (string.IsNullOrWhiteSpace(value))
         {
             throw new ArgumentException(
                 "Association rule set name cannot be null, empty or composed entirely of whitespace.",
