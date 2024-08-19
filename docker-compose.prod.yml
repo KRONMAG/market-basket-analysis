@@ -2,9 +2,9 @@ version: '3.4'
 
 services:
 
-  gateway:
+  nginx:
     image: nginx:1.27.1-alpine
-    container_name: gateway
+    container_name: nginx
     entrypoint: sh -c
       "envsubst '$$DEPLOY_HOST' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf &&
       nginx -g 'daemon off;'"
@@ -21,7 +21,7 @@ services:
       resources:
         limits:
           cpus: 0.25
-          memory: 256M
+          memory: 128M
 
   market-basket-analysis-api:
     image: kronmag/market-basket-analysis-api
