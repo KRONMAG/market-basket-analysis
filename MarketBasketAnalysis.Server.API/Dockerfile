@@ -21,7 +21,6 @@ ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./MarketBasketAnalysis.Server.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
-USER app
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT dotnet MarketBasketAnalysis.Server.API.dll
