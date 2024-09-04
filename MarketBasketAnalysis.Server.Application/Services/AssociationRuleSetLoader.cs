@@ -1,5 +1,6 @@
 ﻿using MarketBasketAnalysis.Common.Protos;
 using MarketBasketAnalysis.Server.Application.Exceptions;
+using MarketBasketAnalysis.Server.Application.Extensions;
 using MarketBasketAnalysis.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
@@ -36,7 +37,8 @@ public sealed class AssociationRuleSetLoader : IAssociationRuleSetLoader
         string associationRuleSetName, CancellationToken token)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        CheckAssociationRuleSetName(associationRuleSetName, nameof(associationRuleSetName));
+
+        associationRuleSetName.CheckAssociationRuleSetName();
 
         await CreateContextIfNeedAsync();
 
@@ -59,7 +61,8 @@ public sealed class AssociationRuleSetLoader : IAssociationRuleSetLoader
         CancellationToken token)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        CheckAssociationRuleSetName(associationRuleSetName, nameof(associationRuleSetName));
+
+        associationRuleSetName.CheckAssociationRuleSetName();
 
         return AsyncEnumerableEx
             .Defer(() => LoadItemsChunkInernalAsync(associationRuleSetName, token))
@@ -93,7 +96,8 @@ public sealed class AssociationRuleSetLoader : IAssociationRuleSetLoader
         string associationRuleSetName, CancellationToken token)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        CheckAssociationRuleSetName(associationRuleSetName, nameof(associationRuleSetName));
+
+        associationRuleSetName.CheckAssociationRuleSetName();
 
         return AsyncEnumerableEx
             .Defer(() => LoadAssociationRuleChunksInternalAsync(associationRuleSetName, token))
@@ -119,16 +123,6 @@ public sealed class AssociationRuleSetLoader : IAssociationRuleSetLoader
                 associationRuleChunk.Data, 0, associationRuleChunk.PayloadSize);
 
             yield return itemChunkMessage;
-        }
-    }
-
-    private static void CheckAssociationRuleSetName(string value, string paramName)
-    {
-        if (string.IsNullOrWhiteSpace(value))
-        {
-            throw new ArgumentException(
-                "Association rule set name cannot be null, empty or composed entirely of whitespace.",
-                paramName);
         }
     }
 

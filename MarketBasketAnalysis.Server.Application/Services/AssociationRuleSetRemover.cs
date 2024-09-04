@@ -1,4 +1,5 @@
 ﻿using MarketBasketAnalysis.Server.Application.Exceptions;
+using MarketBasketAnalysis.Server.Application.Extensions;
 using MarketBasketAnalysis.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
@@ -29,6 +30,8 @@ public sealed class AssociationRuleSetRemover : IAssociationRuleSetRemover
     public async Task RemoveAsync(string associationRuleSetName, CancellationToken token)
     {
         using var context = await _contextFactory.CreateDbContextAsync(token);
+
+        associationRuleSetName.CheckAssociationRuleSetName();
 
         try
         {

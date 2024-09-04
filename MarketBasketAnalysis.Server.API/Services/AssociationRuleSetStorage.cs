@@ -115,6 +115,10 @@ public class AssociationRuleSetStorage : Common.Protos.AssociationRuleSetStorage
                 }, context.CancellationToken);
             }
         }
+        catch (AssociationRuleSetValidationException e)
+        {
+            RpcThrowHelper.InvalidArgument(e.Message);
+        }
         catch (AssociationRuleSetNotFoundException e)
         {
             RpcThrowHelper.NotFound(e.Message);
@@ -248,6 +252,10 @@ public class AssociationRuleSetStorage : Common.Protos.AssociationRuleSetStorage
         try
         {
             await _associationRuleSetRemover.RemoveAsync(request.AssociationRuleSetName, context.CancellationToken);
+        }
+        catch (AssociationRuleSetValidationException e)
+        {
+            RpcThrowHelper.InvalidArgument(e.Message);
         }
         catch (AssociationRuleSetNotFoundException e)
         {

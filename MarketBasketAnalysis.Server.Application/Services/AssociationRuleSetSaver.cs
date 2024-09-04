@@ -1,6 +1,7 @@
 ﻿using Google.Protobuf;
 using MarketBasketAnalysis.Common.Protos;
 using MarketBasketAnalysis.Server.Application.Exceptions;
+using MarketBasketAnalysis.Server.Application.Extensions;
 using MarketBasketAnalysis.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -94,11 +95,7 @@ public sealed class AssociationRuleSetSaver : IAssociationRuleSetSaver
 
     private async Task<AssociationRuleSet> SaveAssociationRuleSetInfo(AssociationRuleSetInfoMessage associationRuleSetMessage, CancellationToken token)
     {
-        if (string.IsNullOrWhiteSpace(associationRuleSetMessage.Name))
-        {
-            throw new AssociationRuleSetValidationException(
-                "Association rule set name cannot be null, empty or composed entirely of whitespace.");
-        }
+        associationRuleSetMessage.Name.CheckAssociationRuleSetName();
 
         if (associationRuleSetMessage.TransactionCount <= 0)
         {
