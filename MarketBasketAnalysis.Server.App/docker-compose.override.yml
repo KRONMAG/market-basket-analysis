@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+
+  market-basket-analysis-api:
+    extends:
+      file: docker-compose.yml
+      service: market-basket-analysis-api
+    build:
+      context: ../.
+      dockerfile: MarketBasketAnalysis.Server.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+
+  grpc-ui:
+    image: fullstorydev/grpcui:v1.4.1
+    command: -plaintext market-basket-analysis-api:8080
+    restart: on-failure
+    ports:
+      - 8082:8080
+    depends_on:
+      market-basket-analysis-api:
+        condition: service_started

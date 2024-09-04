@@ -5,7 +5,7 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "marketbasketanalysis.api": "StartDebugging",
-        "grpc.ui:":  "StartWithoutDebugging"
+        "gateway:":  "StartWithoutDebugging"
       }
     }
   }

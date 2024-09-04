@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketBasketAnalysis.Server.API", "MarketBasketAnalysis.Server.API\MarketBasketAnalysis.Server.API.csproj", "{F537E21F-167A-4FF5-8BAF-236B89C67096}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4B6EF177-1132-425C-A613-DBC5EC774F02}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "MarketBasketAnalysis.Server.App", "MarketBasketAnalysis.Server.App\MarketBasketAnalysis.Server.App.dcproj", "{4B6EF177-1132-425C-A613-DBC5EC774F02}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{67AFAD2F-6AC6-4620-98C1-4071C9152C74}"
 	ProjectSection(SolutionItems) = preProject
