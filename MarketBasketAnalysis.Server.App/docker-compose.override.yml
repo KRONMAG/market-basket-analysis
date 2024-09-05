@@ -2,6 +2,14 @@ version: '3.4'
 
 services:
 
+  market-basket-analysis-app:
+    extends:
+      file: docker-compose.yml
+      service: market-basket-analysis-app
+    build:
+      context: ../.
+      dockerfile: MarketBasketAnalysis.Server.App/gateway/Dockerfile
+
   market-basket-analysis-api:
     extends:
       file: docker-compose.yml

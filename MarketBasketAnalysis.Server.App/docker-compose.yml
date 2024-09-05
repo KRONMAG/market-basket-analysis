@@ -6,8 +6,8 @@ services:
     image: market-basket-analysis-app
     container_name: market-basket-analysis-app
     build:
-      context: ../.
-      dockerfile: MarketBasketAnalysis.Server.App/gateway/Dockerfile
+      context: .
+      dockerfile: gateway/Dockerfile
     entrypoint: sh -c
       "envsubst '$$HOST' < /etc/nginx/nginx.template.conf > /etc/nginx/nginx.conf &&
       envsubst '$$JWKS_URI $$JWT_ISSUER $$JWT_AUDIENCE' < /etc/nginx/jwt-auth.template.lua > /etc/nginx/jwt-auth.lua &&
@@ -33,6 +33,7 @@ services:
 
   market-basket-analysis-api:
     image: kronmag/market-basket-analysis-api
+    container_name: market-basket-analysis-api
     volumes:
       - market-basket-analysis-data:/app/data
     restart: on-failure
